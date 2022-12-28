@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest",
+  "manifest_version": 3,
+  "name": "All You Need is Copy",
+  "description": "Copy the site URL in any format.",
+  "version": "1.0.0",
+  "content_scripts": [
+    {
+      "js": ["./content.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

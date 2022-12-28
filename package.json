@@ -1,0 +1,15 @@
+{
+  "name": "all-you-need-is-copy",
+  "version": "1.0.0",
+  "description": "Copy the site URL in any format.",
+  "main": "index.js",
+  "author": "sushidesu",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn build:content",
+    "build:content": "esbuild --bundle --outdir=build src/content.ts"
+  },
+  "devDependencies": {
+    "esbuild": "^0.16.12"
+  }
+}
