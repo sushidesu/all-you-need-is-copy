@@ -10,6 +10,7 @@
     "build:content": "esbuild --bundle --outdir=build src/content.ts"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "esbuild": "^0.16.12"
   }
 }
