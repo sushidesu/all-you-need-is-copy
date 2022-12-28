@@ -6,8 +6,9 @@
   "author": "sushidesu",
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:content",
-    "build:content": "esbuild --bundle --outdir=build src/content.ts"
+    "build": "concurrently \"yarn:build:*\"",
+    "build:content": "esbuild --bundle --outdir=build src/content.ts",
+    "build:manifest": "mkdir -p build && cp manifest.json build/manifest.json"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
