@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "concurrently \"yarn:build:*\"",
-    "build:content": "esbuild --bundle --outdir=build src/content.ts",
+    "build:content": "esbuild --bundle --target=esnext --outdir=build src/content.ts",
     "build:manifest": "mkdir -p build && cp manifest.json build/manifest.json"
   },
   "devDependencies": {
