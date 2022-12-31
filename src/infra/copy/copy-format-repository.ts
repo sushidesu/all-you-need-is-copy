@@ -20,7 +20,7 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
     return Promise.resolve(this.formats)
   }
 
-  push(_copyFormat: CopyFormat): Promise<void> {
+  push(_copyFormatValue: Omit<CopyFormat, "id">): Promise<void> {
     // TODO:
     return Promise.resolve()
   }

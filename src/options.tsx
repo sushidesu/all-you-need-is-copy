@@ -1,13 +1,21 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react"
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  FormEventHandler,
+} from "react"
 import ReactDOM from "react-dom/client"
 import type { CopyFormat } from "./feature/copy/copy-format"
 import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
+import { useInput } from "./ui/useInput"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
 
-  const [count, setCount] = useState(0)
   const [copyFormats, setCopyFormats] = useState<CopyFormat[]>([])
+  const [name, changeName, resetName] = useInput()
+  const [format, changeFormat, resetFormat] = useInput()
 
   useEffect(() => {
     let unmounted = false
@@ -23,22 +31,43 @@ const Options = () => {
     return () => {
       unmounted = true
     }
-  }, [])
+  }, [copyFormatRepository, setCopyFormats])
+
+  const handleSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
+    async (e) => {
+      e.preventDefault()
+      await copyFormatRepository.push({
+        name,
+        format,
+      })
+      resetName()
+      resetFormat()
+    },
+    [copyFormatRepository, resetName, resetFormat]
+  )
 
   return (
     <div>
-      <ul>
-        {copyFormats.map((fmt) => (
-          <li key={fmt.id}>{fmt.name}</li>
-        ))}
-      </ul>
-      <button
-        onClick={useCallback(() => {
-          setCount((prev) => prev + 1)
-        }, [])}
-      >
-        {count}
-      </button>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>name</label>
+            <input value={name} onChange={changeName} />
+          </div>
+          <div>
+            <label>format</label>
+            <input value={format} onChange={changeFormat} />
+          </div>
+          <button type={"submit"}>register</button>
+        </form>
+      </div>
+      <div>
+        <ul>
+          {copyFormats.map((fmt) => (
+            <li key={fmt.id}>{fmt.name}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
