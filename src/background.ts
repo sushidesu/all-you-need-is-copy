@@ -4,6 +4,8 @@ import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
 const copyFormatRepository = new CopyFormatRepository()
 
 chrome.runtime.onInstalled.addListener(async () => {
+  await copyFormatRepository.init()
+
   const formats = await copyFormatRepository.getAll()
   for (const copy of formats) {
     chrome.contextMenus.create({
