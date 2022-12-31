@@ -8,7 +8,7 @@
   "scripts": {
     "build": "concurrently \"yarn:build:*\"",
     "build:content": "esbuild --bundle --target=esnext --outdir=build src/content.ts",
-    "build:manifest": "mkdir -p build && cp manifest.json build/manifest.json"
+    "build:manifest": "node src/scripts/build-manifest.js"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
