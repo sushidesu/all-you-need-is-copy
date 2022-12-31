@@ -11,6 +11,7 @@
     "build:manifest": "node src/scripts/build-manifest.js"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.206",
     "concurrently": "^7.6.0",
     "esbuild": "^0.16.12"
   }
