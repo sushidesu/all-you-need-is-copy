@@ -1,19 +1,18 @@
-import type { CopyFormat } from "../../feature/copy/copy-format";
-import type { CopyFormatRepositoryInterface } from "../../feature/copy/copy-format-repository-interface";
+import type { CopyFormat } from "../../feature/copy/copy-format"
+import type { CopyFormatRepositoryInterface } from "../../feature/copy/copy-format-repository-interface"
 
 export class CopyFormatRepository implements CopyFormatRepositoryInterface {
-
   formats: CopyFormat[] = [
     {
       id: "copy-as-markdown",
       name: "markdown",
-      format: "[<title>](<url>)"
-    }
+      format: "[<title>](<url>)",
+    },
   ]
 
   get(id: string): Promise<CopyFormat | undefined> {
     // TODO:
-    return Promise.resolve(this.formats.find(c => c.id == id))
+    return Promise.resolve(this.formats.find((c) => c.id == id))
   }
 
   getAll(): Promise<CopyFormat[]> {

@@ -1,6 +1,8 @@
-export type Message = {
-  type: "copy",
-  format: string
-} | {
-  type: "hello"
-}
+export type Message =
+  | {
+      type: "copy"
+      format: string
+    }
+  | {
+      type: "hello"
+    }

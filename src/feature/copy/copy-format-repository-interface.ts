@@ -1,4 +1,4 @@
-import type { CopyFormat } from "./copy-format";
+import type { CopyFormat } from "./copy-format"
 
 export interface CopyFormatRepositoryInterface {
   get(id: string): Promise<CopyFormat | undefined>

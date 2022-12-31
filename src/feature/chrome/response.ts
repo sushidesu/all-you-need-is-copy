@@ -1,5 +1,7 @@
-export type Response = {
-  type: "copied"
-} | {
-  type: "hello"
-}
+export type Response =
+  | {
+      type: "copied"
+    }
+  | {
+      type: "hello"
+    }

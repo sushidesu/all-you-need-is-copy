@@ -8,11 +8,11 @@ chrome.runtime.onMessage.addListener(async (request, _, sendResponse) => {
       await navigator.clipboard.writeText(parsed)
       // TODO: copied を送って、アイコンにチェックマークをつける
       sendResponse("ok")
-      break;
+      break
     }
     case "hello": {
       // sample
-      break;
+      break
     }
     default: {
       message satisfies never
@@ -22,9 +22,11 @@ chrome.runtime.onMessage.addListener(async (request, _, sendResponse) => {
 
 // TODO: 名前、置き場所
 const parse = (format: string): string => {
-  return format
-    // <title>
-    .replaceAll(/<title>/g, document.title)
-    // <url>
-    .replaceAll(/<url>/g, document.URL)
+  return (
+    format
+      // <title>
+      .replaceAll(/<title>/g, document.title)
+      // <url>
+      .replaceAll(/<url>/g, document.URL)
+  )
 }

@@ -1,5 +1,5 @@
 const path = require("path")
-const { readFile , writeFile, mkdir } = require("fs/promises")
+const { readFile, writeFile, mkdir } = require("fs/promises")
 const { cwd } = require("process")
 
 const MANIFEST_FILE_NAME = "manifest.json"
@@ -17,11 +17,14 @@ const main = async () => {
   const distDir = path.join(currentDir, DIST_DIR_NAME)
   try {
     await mkdir(distDir)
-  } catch(_) {
+  } catch (_) {
     // distDir already exists
     // do nothing.
   }
-  await writeFile(path.join(distDir, MANIFEST_FILE_NAME), JSON.stringify(rest, undefined, 2))
+  await writeFile(
+    path.join(distDir, MANIFEST_FILE_NAME),
+    JSON.stringify(rest, undefined, 2)
+  )
 }
 
 main()
