@@ -22,7 +22,6 @@ const main = async () => {
     // do nothing.
   }
   await writeFile(path.join(distDir, MANIFEST_FILE_NAME), JSON.stringify(rest, undefined, 2))
-  console.log(rest)
 }
 
 main()
