@@ -10,13 +10,18 @@
     "build:check": "tsc --noEmit",
     "build:content": "esbuild --bundle --target=esnext --outdir=build src/content.ts",
     "build:background": "esbuild --bundle --target=esnext --outdir=build src/background.ts",
-    "build:manifest": "node src/scripts/build-manifest.js"
+    "build:manifest": "node src/scripts/build-manifest.js",
+    "fmt": "concurrently \"yarn:fmt:*\"",
+    "fmt:format": "prettier src",
+    "fmt:lint": "eslint src"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^1.0.2",
     "@types/chrome": "^0.0.206",
     "concurrently": "^7.6.0",
     "esbuild": "^0.16.12",
+    "eslint": "^8.31.0",
+    "prettier": "^2.8.1",
     "typescript": "^4.9.4"
   }
 }
