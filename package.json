@@ -8,6 +8,7 @@
   "scripts": {
     "build": "concurrently \"yarn:build:*\"",
     "build:content": "esbuild --bundle --target=esnext --outdir=build src/content.ts",
+    "build:background": "esbuild --bundle --target=esnext --outdir=build src/background.ts",
     "build:manifest": "node src/scripts/build-manifest.js"
   },
   "devDependencies": {

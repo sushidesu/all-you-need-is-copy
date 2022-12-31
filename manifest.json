@@ -4,6 +4,10 @@
   "name": "All You Need is Copy",
   "description": "Copy the site URL in any format.",
   "version": "1.0.0",
+  "permissions": ["contextMenus"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "js": ["./content.js"],
