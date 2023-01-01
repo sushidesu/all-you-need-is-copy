@@ -10,8 +10,9 @@
     "build:check": "tsc --noEmit",
     "build:content": "esbuild --bundle --target=esnext --outdir=build src/content.ts",
     "build:background": "esbuild --bundle --target=esnext --outdir=build src/background.ts",
-    "build:options": "esbuild --bundle --target=esnext --platform=browser --outdir=build src/options.tsx && cp src/options.html build/options.html",
+    "build:options": "cp src/options.html build/options.html && esbuild --bundle --target=esnext --platform=browser --outdir=build src/options.tsx",
     "build:manifest": "node src/scripts/build-manifest.js",
+    "dev": "concurrently \"yarn build:content --watch\" \"yarn build:background --watch\" \"yarn build:options --watch\"",
     "fmt": "concurrently \"yarn:fmt:*\"",
     "fmt:format": "prettier --loglevel error --write src",
     "fmt:lint": "eslint --fix --max-warnings=0 src/**.ts"
