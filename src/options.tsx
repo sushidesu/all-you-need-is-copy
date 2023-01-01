@@ -4,11 +4,13 @@ import React, {
   useMemo,
   useEffect,
   FormEventHandler,
+  FocusEventHandler,
 } from "react"
 import ReactDOM from "react-dom/client"
 import type { CopyFormat } from "./feature/copy/copy-format"
 import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
 import { useInput } from "./ui/useInput"
+import { CopyFormatItems } from "./feature/copy/CopyFormatItems"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
@@ -46,6 +48,24 @@ const Options = () => {
     [copyFormatRepository, resetName, resetFormat]
   )
 
+  const handleUpdateName = useCallback<
+    (id: string) => FocusEventHandler<HTMLParagraphElement>
+  >(
+    (id) => async (e) => {
+      console.log("updateName", id, e.target.innerText)
+    },
+    []
+  )
+
+  const handleUpdateFormat = useCallback<
+    (id: string) => FocusEventHandler<HTMLParagraphElement>
+  >(
+    (id) => async (e) => () => {
+      console.log("updateFormat", id, e.target.innerText)
+    },
+    []
+  )
+
   return (
     <div>
       <div>
@@ -62,11 +82,11 @@ const Options = () => {
         </form>
       </div>
       <div>
-        <ul>
-          {copyFormats.map((fmt) => (
-            <li key={fmt.id}>{fmt.name}</li>
-          ))}
-        </ul>
+        <CopyFormatItems
+          copyFormatItems={copyFormats}
+          onUpdateName={handleUpdateName}
+          onUpdateFormat={handleUpdateFormat}
+        />
       </div>
     </div>
   )
