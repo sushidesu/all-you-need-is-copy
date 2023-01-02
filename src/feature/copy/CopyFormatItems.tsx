@@ -6,12 +6,14 @@ type CopyFormatItemsProps = {
   copyFormatItems: CopyFormat[]
   onChangeName: (id: string) => CopyFormatItemProps["onChangeName"]
   onChangeFormat: (id: string) => CopyFormatItemProps["onChangeFormat"]
+  onBlurFormat: (id: string) => CopyFormatItemProps["onBlurFormat"]
 }
 
 export const CopyFormatItems = ({
   copyFormatItems,
   onChangeName,
   onChangeFormat,
+  onBlurFormat,
 }: CopyFormatItemsProps) => {
   return (
     <ul className={"copy-format-items"}>
@@ -26,6 +28,7 @@ export const CopyFormatItems = ({
             format={fmt.format}
             onChangeName={onChangeName(fmt.id)}
             onChangeFormat={onChangeFormat(fmt.id)}
+            onBlurFormat={onBlurFormat(fmt.id)}
           />
         </li>
       ))}

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, FocusEventHandler } from "react"
+import React, { useMemo } from "react"
 import { parser, CpyFormateRoot, CopyFormatNode } from "./parser"
 
 export type CopyFormatItemProps = {
@@ -6,6 +6,7 @@ export type CopyFormatItemProps = {
   format: string
   onChangeName: React.ChangeEventHandler<HTMLInputElement>
   onChangeFormat: React.ChangeEventHandler<HTMLTextAreaElement>
+  onBlurFormat: React.FocusEventHandler<HTMLTextAreaElement>
 }
 
 export const CopyFormatItem = ({
@@ -13,6 +14,7 @@ export const CopyFormatItem = ({
   format,
   onChangeName,
   onChangeFormat,
+  onBlurFormat,
 }: CopyFormatItemProps) => {
   const selection = useMemo(() => genSelection(parser(format)), [format])
 
@@ -26,6 +28,7 @@ export const CopyFormatItem = ({
           text={format}
           selections={selection}
           onChange={onChangeFormat}
+          onBlur={onBlurFormat}
         />
       </div>
     </div>
@@ -86,6 +89,7 @@ type MiniEditorProps = {
   text: string
   selections: Range[]
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>
+  onBlur: React.FocusEventHandler<HTMLTextAreaElement>
 }
 
 type Range = [number, number]
@@ -100,7 +104,12 @@ type Block =
       range: Range
     }
 
-const MiniEditor = ({ text, selections, onChange }: MiniEditorProps) => {
+const MiniEditor = ({
+  text,
+  selections,
+  onChange,
+  onBlur,
+}: MiniEditorProps) => {
   const blocks: Block[] =
     selections.length <= 0 ? [{ type: "plain", range: [0, text.length] }] : []
 
@@ -143,7 +152,7 @@ const MiniEditor = ({ text, selections, onChange }: MiniEditorProps) => {
           )
         )}
       </p>
-      <textarea value={text} onChange={onChange} />
+      <textarea value={text} onChange={onChange} onBlur={onBlur} />
     </div>
   )
 }

@@ -87,10 +87,21 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
     // TODO:
     return Promise.resolve()
   }
-  update(_id: string, _copyFormat: CopyFormat): Promise<void> {
-    // TODO:
-    return Promise.resolve()
+
+  async update(id: string, copyFormat: CopyFormat): Promise<void> {
+    const bucket = await this.getCopyFormatsBucket()
+    const next = { ...bucket }
+
+    const target = next[id]
+    if (target === undefined) return
+    const updated = { ...target, ...copyFormat }
+    next[id] = updated
+
+    await chrome.storage.sync.set({
+      [chromeStorageKeys.copyFormats]: next,
+    })
   }
+
   delete(_id: string): Promise<void> {
     // TODO:
     return Promise.resolve()

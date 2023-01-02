@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, Suspense } from "react"
+import React, { useCallback, useMemo, Suspense, useState } from "react"
 import ReactDOM from "react-dom/client"
 import type { CopyFormat } from "./feature/copy/copy-format"
 import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
@@ -51,6 +51,27 @@ const Options = () => {
     [setClone]
   )
 
+  const [loading, setLoading] = useState(false)
+
+  const handleBlurFormat = useCallback<(id: string) => () => void>(
+    (id) => async () => {
+      setLoading(true)
+
+      const original = copyFormats.find((f) => f.id === id)
+      const target = clone.find((f) => f.id === id)
+      if (original === undefined || target === undefined) return
+      await copyFormatRepository.update(id, {
+        ...original,
+        format: target.format,
+      })
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+    },
+    [copyFormatRepository]
+  )
+
   return (
     <div className={"sections container"}>
       <h1>Copy Format List</h1>
@@ -59,8 +80,10 @@ const Options = () => {
           copyFormatItems={clone}
           onChangeName={handleUpdateName}
           onChangeFormat={handleUpdateFormat}
+          onBlurFormat={handleBlurFormat}
         />
       </div>
+      {loading && <div className={"alert"}>saving...</div>}
     </div>
   )
 }
