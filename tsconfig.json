@@ -1,9 +1,9 @@
 {
   "extends": "@tsconfig/strictest",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "module": "Node16",
+    "moduleResolution": "Node",
     "noEmit": true,
     "jsx": "react"
   },
