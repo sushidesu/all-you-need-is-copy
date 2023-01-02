@@ -15,7 +15,8 @@
     "dev": "concurrently \"yarn build:content --watch\" \"yarn build:background --watch\" \"yarn build:options --watch\"",
     "fmt": "concurrently \"yarn:fmt:*\"",
     "fmt:format": "prettier --loglevel error --write src",
-    "fmt:lint": "eslint --fix --max-warnings=0 src/**.ts"
+    "fmt:lint": "eslint --fix --max-warnings=0 src/**.ts",
+    "test": "vitest"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^1.0.2",
