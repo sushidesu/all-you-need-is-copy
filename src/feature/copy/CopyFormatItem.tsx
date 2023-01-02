@@ -4,15 +4,16 @@ import { parser, CpyFormateRoot, CopyFormatNode } from "./parser"
 export type CopyFormatItemProps = {
   name: string
   format: string
-  onChangeName: React.ChangeEventHandler<HTMLInputElement>
   onChangeFormat: React.ChangeEventHandler<HTMLTextAreaElement>
   onBlurFormat: React.FocusEventHandler<HTMLTextAreaElement>
+  onChangeName: React.ChangeEventHandler<HTMLInputElement>
+  onBlurName: React.FocusEventHandler<HTMLInputElement>
 }
 
 export const CopyFormatItem = ({
   name,
   format,
-  onChangeName,
+  onBlurName,
   onChangeFormat,
   onBlurFormat,
 }: CopyFormatItemProps) => {
@@ -21,7 +22,7 @@ export const CopyFormatItem = ({
   return (
     <div className={"copy-format-item-inner"}>
       <div className={"copy-format-item-cell"}>
-        <input defaultValue={name} />
+        <input defaultValue={name} onBlur={onBlurName} />
       </div>
       <div className={"copy-format-item-cell"}>
         <MiniEditor

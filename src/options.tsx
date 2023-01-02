@@ -31,6 +31,26 @@ const Options = () => {
     },
     []
   )
+  const handleBlurName = useCallback<
+    (id: string) => React.FormEventHandler<HTMLInputElement>
+  >(
+    (id) => async (e) => {
+      setLoading(true)
+
+      const original = copyFormats.find((f) => f.id === id)
+      if (original === undefined) return
+
+      await copyFormatRepository.update(id, {
+        ...original,
+        name: e.currentTarget.value,
+      })
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+    },
+    [copyFormats, copyFormatRepository]
+  )
 
   const handleUpdateFormat = useCallback<
     (id: string) => React.ChangeEventHandler<HTMLTextAreaElement>
@@ -69,7 +89,7 @@ const Options = () => {
         setLoading(false)
       }, 1000)
     },
-    [copyFormatRepository]
+    [copyFormats, copyFormatRepository]
   )
 
   return (
@@ -79,6 +99,7 @@ const Options = () => {
         <CopyFormatItems
           copyFormatItems={clone}
           onChangeName={handleUpdateName}
+          onBlurName={handleBlurName}
           onChangeFormat={handleUpdateFormat}
           onBlurFormat={handleBlurFormat}
         />
