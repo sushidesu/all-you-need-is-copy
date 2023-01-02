@@ -1,39 +1,30 @@
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-  FormEventHandler,
-  FocusEventHandler,
-} from "react"
+import React, { useCallback, useMemo, FormEventHandler, Suspense } from "react"
 import ReactDOM from "react-dom/client"
 import type { CopyFormat } from "./feature/copy/copy-format"
 import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
 import { useInput } from "./ui/useInput"
 import { CopyFormatItems } from "./feature/copy/CopyFormatItems"
+import { useSyncState } from "./ui/useSyncState"
+import useSWRImmutable from "swr/immutable"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
 
-  const [copyFormats, setCopyFormats] = useState<CopyFormat[]>([])
+  const { data } = useSWRImmutable(
+    { key: "copyFormats" },
+    () => {
+      console.log("fetch")
+      return copyFormatRepository.getAll()
+    },
+    {
+      suspense: true,
+    }
+  )
+  const copyFormats = data as CopyFormat[]
+
+  const [clone, setClone] = useSyncState(copyFormats)
   const [name, changeName, resetName] = useInput()
   const [format, changeFormat, resetFormat] = useInput()
-
-  useEffect(() => {
-    let unmounted = false
-
-    const start = async () => {
-      const formats = await copyFormatRepository.getAll()
-      if (!unmounted) {
-        setCopyFormats(formats)
-      }
-    }
-    start()
-
-    return () => {
-      unmounted = true
-    }
-  }, [copyFormatRepository, setCopyFormats])
 
   const handleSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
     async (e) => {
@@ -49,7 +40,7 @@ const Options = () => {
   )
 
   const handleUpdateName = useCallback<
-    (id: string) => FocusEventHandler<HTMLParagraphElement>
+    (id: string) => React.ChangeEventHandler<HTMLParagraphElement>
   >(
     (id) => async (e) => {
       console.log("updateName", id, e.target.innerText)
@@ -58,12 +49,22 @@ const Options = () => {
   )
 
   const handleUpdateFormat = useCallback<
-    (id: string) => FocusEventHandler<HTMLParagraphElement>
+    (id: string) => React.ChangeEventHandler<HTMLTextAreaElement>
   >(
-    (id) => async (e) => () => {
+    (id) => async (e) => {
+      setClone((list) => {
+        const next = [...list]
+
+        const targetIndex = next.findIndex((v) => v.id === id)
+        const target = next[targetIndex]
+        if (target === undefined) return next
+
+        target.format = e.target.value
+        return next
+      })
       console.log("updateFormat", id, e.target.innerText)
     },
-    []
+    [setClone]
   )
 
   return (
@@ -83,17 +84,27 @@ const Options = () => {
       </div>
       <div>
         <CopyFormatItems
-          copyFormatItems={copyFormats}
-          onUpdateName={handleUpdateName}
-          onUpdateFormat={handleUpdateFormat}
+          copyFormatItems={clone}
+          onChangeName={handleUpdateName}
+          onChangeFormat={handleUpdateFormat}
         />
       </div>
     </div>
   )
 }
 
+const OptionsPage = () => {
+  return (
+    <div>
+      <Suspense fallback={<div>loading...</div>}>
+        <Options />
+      </Suspense>
+    </div>
+  )
+}
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Options />
+    <OptionsPage />
   </React.StrictMode>
 )

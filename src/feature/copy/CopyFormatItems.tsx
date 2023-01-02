@@ -4,14 +4,14 @@ import { CopyFormatItem, CopyFormatItemProps } from "./CopyFormatItem"
 
 type CopyFormatItemsProps = {
   copyFormatItems: CopyFormat[]
-  onUpdateName: (id: string) => CopyFormatItemProps["onUpdateName"]
-  onUpdateFormat: (id: string) => CopyFormatItemProps["onUpdateFormat"]
+  onChangeName: (id: string) => CopyFormatItemProps["onChangeName"]
+  onChangeFormat: (id: string) => CopyFormatItemProps["onChangeFormat"]
 }
 
 export const CopyFormatItems = ({
   copyFormatItems,
-  onUpdateName,
-  onUpdateFormat,
+  onChangeName,
+  onChangeFormat,
 }: CopyFormatItemsProps) => {
   return (
     <ul>
@@ -20,8 +20,8 @@ export const CopyFormatItems = ({
           <CopyFormatItem
             name={fmt.name}
             format={fmt.format}
-            onUpdateName={onUpdateName(fmt.id)}
-            onUpdateFormat={onUpdateFormat(fmt.id)}
+            onChangeName={onChangeName(fmt.id)}
+            onChangeFormat={onChangeFormat(fmt.id)}
           />
         </li>
       ))}

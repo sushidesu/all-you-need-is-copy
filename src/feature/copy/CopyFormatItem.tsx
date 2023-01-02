@@ -1,24 +1,29 @@
-import React, { useMemo, FocusEventHandler } from "react"
+import React, { useMemo, useCallback, FocusEventHandler } from "react"
 import { parser, CpyFormateRoot, CopyFormatNode } from "./parser"
 
 export type CopyFormatItemProps = {
   name: string
-  onUpdateName: FocusEventHandler<HTMLParagraphElement>
   format: string
-  onUpdateFormat: FocusEventHandler<HTMLParagraphElement>
+  onChangeName: React.ChangeEventHandler<HTMLInputElement>
+  onChangeFormat: React.ChangeEventHandler<HTMLTextAreaElement>
 }
 
 export const CopyFormatItem = ({
   name,
-  onUpdateName,
   format,
-  onUpdateFormat,
+  onChangeName,
+  onChangeFormat,
 }: CopyFormatItemProps) => {
-  const selection = useMemo(() => genSelection(parser(format)), [])
+  const selection = useMemo(() => genSelection(parser(format)), [format])
+
   return (
     <div>
-      <MiniEditor text={name} selections={[]} />
-      <MiniEditor text={format} selections={selection} />
+      <input defaultValue={name} />
+      <MiniEditor
+        text={format}
+        selections={selection}
+        onChange={onChangeFormat}
+      />
     </div>
   )
 }
@@ -76,6 +81,7 @@ const getLength = (node: CopyFormatNode): number => {
 type MiniEditorProps = {
   text: string
   selections: Range[]
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>
 }
 
 type Range = [number, number]
@@ -90,7 +96,7 @@ type Block =
       range: Range
     }
 
-const MiniEditor = ({ text, selections }: MiniEditorProps) => {
+const MiniEditor = ({ text, selections, onChange }: MiniEditorProps) => {
   const blocks: Block[] =
     selections.length <= 0 ? [{ type: "plain", range: [0, text.length] }] : []
 
@@ -115,23 +121,26 @@ const MiniEditor = ({ text, selections }: MiniEditorProps) => {
   }
 
   return (
-    <p>
-      {blocks.map((block) =>
-        block.type === "highlight" ? (
-          <code className={`block ${block.type}`}>
-            {[...range(block.range)].map((index) => (
-              <span>{text[index]}</span>
-            ))}
-          </code>
-        ) : (
-          <span className={`block ${block.type}`}>
-            {[...range(block.range)].map((index) => (
-              <span>{text[index]}</span>
-            ))}
-          </span>
-        )
-      )}
-    </p>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <p>
+        {blocks.map((block) =>
+          block.type === "highlight" ? (
+            <code className={`block ${block.type}`}>
+              {[...range(block.range)].map((index) => (
+                <span>{text[index]}</span>
+              ))}
+            </code>
+          ) : (
+            <span className={`block ${block.type}`}>
+              {[...range(block.range)].map((index) => (
+                <span>{text[index]}</span>
+              ))}
+            </span>
+          )
+        )}
+      </p>
+      <textarea value={text} onChange={onChange} />
+    </div>
   )
 }
 
