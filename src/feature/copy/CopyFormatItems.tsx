@@ -14,9 +14,13 @@ export const CopyFormatItems = ({
   onChangeFormat,
 }: CopyFormatItemsProps) => {
   return (
-    <ul>
+    <ul className={"copy-format-items"}>
+      <li className={"copy-format-item"}>
+        <p className={"copy-format-item-cell head"}>Name</p>
+        <p className={"copy-format-item-cell head"}>Format</p>
+      </li>
       {copyFormatItems.map((fmt) => (
-        <li key={fmt.id}>
+        <li className={"copy-format-item"} key={fmt.id}>
           <CopyFormatItem
             name={fmt.name}
             format={fmt.format}

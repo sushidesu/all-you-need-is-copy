@@ -17,13 +17,17 @@ export const CopyFormatItem = ({
   const selection = useMemo(() => genSelection(parser(format)), [format])
 
   return (
-    <div>
-      <input defaultValue={name} />
-      <MiniEditor
-        text={format}
-        selections={selection}
-        onChange={onChangeFormat}
-      />
+    <div className={"copy-format-item-inner"}>
+      <div className={"copy-format-item-cell"}>
+        <input defaultValue={name} />
+      </div>
+      <div className={"copy-format-item-cell"}>
+        <MiniEditor
+          text={format}
+          selections={selection}
+          onChange={onChangeFormat}
+        />
+      </div>
     </div>
   )
 }

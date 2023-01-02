@@ -1,8 +1,7 @@
-import React, { useCallback, useMemo, FormEventHandler, Suspense } from "react"
+import React, { useCallback, useMemo, Suspense } from "react"
 import ReactDOM from "react-dom/client"
 import type { CopyFormat } from "./feature/copy/copy-format"
 import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
-import { useInput } from "./ui/useInput"
 import { CopyFormatItems } from "./feature/copy/CopyFormatItems"
 import { useSyncState } from "./ui/useSyncState"
 import useSWRImmutable from "swr/immutable"
@@ -23,21 +22,6 @@ const Options = () => {
   const copyFormats = data as CopyFormat[]
 
   const [clone, setClone] = useSyncState(copyFormats)
-  const [name, changeName, resetName] = useInput()
-  const [format, changeFormat, resetFormat] = useInput()
-
-  const handleSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
-    async (e) => {
-      e.preventDefault()
-      await copyFormatRepository.push({
-        name,
-        format,
-      })
-      resetName()
-      resetFormat()
-    },
-    [copyFormatRepository, resetName, resetFormat]
-  )
 
   const handleUpdateName = useCallback<
     (id: string) => React.ChangeEventHandler<HTMLParagraphElement>
@@ -68,21 +52,9 @@ const Options = () => {
   )
 
   return (
-    <div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>name</label>
-            <input value={name} onChange={changeName} />
-          </div>
-          <div>
-            <label>format</label>
-            <input value={format} onChange={changeFormat} />
-          </div>
-          <button type={"submit"}>register</button>
-        </form>
-      </div>
-      <div>
+    <div className={"sections container"}>
+      <h1>Copy Format List</h1>
+      <div className={"section"}>
         <CopyFormatItems
           copyFormatItems={clone}
           onChangeName={handleUpdateName}
@@ -95,7 +67,7 @@ const Options = () => {
 
 const OptionsPage = () => {
   return (
-    <div>
+    <div className={"layout"}>
       <Suspense fallback={<div>loading...</div>}>
         <Options />
       </Suspense>
