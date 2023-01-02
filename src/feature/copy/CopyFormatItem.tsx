@@ -137,17 +137,17 @@ const MiniEditor = ({
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <p>
-        {blocks.map((block) =>
+        {blocks.map((block, i) =>
           block.type === "highlight" ? (
-            <code className={`block ${block.type}`}>
+            <code className={`block ${block.type}`} key={i}>
               {[...range(block.range)].map((index) => (
-                <span>{text[index]}</span>
+                <span key={index}>{text[index]}</span>
               ))}
             </code>
           ) : (
-            <span className={`block ${block.type}`}>
+            <span className={`block ${block.type}`} key={i}>
               {[...range(block.range)].map((index) => (
-                <span>{text[index]}</span>
+                <span key={index}>{text[index]}</span>
               ))}
             </span>
           )
