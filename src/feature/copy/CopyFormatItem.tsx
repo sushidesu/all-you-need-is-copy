@@ -1,4 +1,5 @@
-import React, { FocusEventHandler } from "react"
+import React, { useMemo, FocusEventHandler } from "react"
+import { parser, CpyFormateRoot, CopyFormatNode } from "./parser"
 
 export type CopyFormatItemProps = {
   name: string
@@ -13,12 +14,63 @@ export const CopyFormatItem = ({
   format,
   onUpdateFormat,
 }: CopyFormatItemProps) => {
+  const selection = useMemo(() => genSelection(parser(format)), [])
   return (
     <div>
       <MiniEditor text={name} selections={[]} />
-      <MiniEditor text={format} selections={[[1, 8]]} />
+      <MiniEditor text={format} selections={selection} />
     </div>
   )
+}
+
+const genSelection = (root: CpyFormateRoot): Range[] => {
+  if (root.children[0]?.type !== "cpyParagraph") {
+    return []
+  }
+
+  let j = 0
+  const result: Range[] = []
+  const paragraph = root.children[0].children
+
+  for (const node of paragraph) {
+    switch (node.type) {
+      case "cpyAngleBracket": {
+        const length = getLength(node)
+        result.push([j, j + length + 2])
+        j += length + 2
+        continue
+      }
+      case "cpySymbolTitle":
+        j += 5
+        continue
+      case "cpySymbolUrl":
+        j += 3
+        continue
+      case "cpyText":
+        j += node.value.length
+        continue
+    }
+  }
+
+  return result
+}
+
+const getLength = (node: CopyFormatNode): number => {
+  switch (node.type) {
+    case "cpyText":
+      return node.value.length
+    case "cpySymbolTitle":
+      return 5
+    case "cpySymbolUrl":
+      return 3
+    default: {
+      let length = 0
+      for (const child of node.children) {
+        length += getLength(child)
+      }
+      return length
+    }
+  }
 }
 
 type MiniEditorProps = {

@@ -33,7 +33,7 @@ type CpyFormatAngleBracket = CpyFormatNodeObj<
   typeof CopyFormatNodeTypes["cpyAngleBracket"]
 >
 
-type CopyFormatNode =
+export type CopyFormatNode =
   | CpyFormatNodeParagraph
   | CpyFormatAngleBracket
   | CpyFormatNodeValue<typeof CopyFormatNodeTypes["cpyText"], string>
