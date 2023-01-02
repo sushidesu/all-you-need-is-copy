@@ -16,6 +16,29 @@ chrome.runtime.onInstalled.addListener(async () => {
   }
 })
 
+chrome.runtime.onMessage.addListener(async (request, _, response) => {
+  const message = request as Message
+  switch (message.type) {
+    case "copy":
+      // do nothing
+      break
+    case "updateName": {
+      chrome.contextMenus.update(
+        message.id,
+        {
+          title: message.name,
+        },
+        () => {
+          response("ok")
+        }
+      )
+      break
+    }
+    default:
+      message satisfies never
+  }
+})
+
 chrome.contextMenus.onClicked.addListener(async (item, tab) => {
   const copy = await copyFormatRepository.get(item.menuItemId.toString())
 

@@ -10,8 +10,8 @@ chrome.runtime.onMessage.addListener(async (request, _, sendResponse) => {
       sendResponse("ok")
       break
     }
-    case "hello": {
-      // sample
+    case "updateName": {
+      // do nothing
       break
     }
     default: {

@@ -5,6 +5,7 @@ import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
 import { CopyFormatItems } from "./feature/copy/CopyFormatItems"
 import { useSyncState } from "./ui/useSyncState"
 import useSWRImmutable from "swr/immutable"
+import type { Message } from "./feature/chrome/message"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
@@ -31,6 +32,7 @@ const Options = () => {
     },
     []
   )
+
   const handleBlurName = useCallback<
     (id: string) => React.FormEventHandler<HTMLInputElement>
   >(
@@ -40,10 +42,17 @@ const Options = () => {
       const original = copyFormats.find((f) => f.id === id)
       if (original === undefined) return
 
+      const newName = e.currentTarget.value
       await copyFormatRepository.update(id, {
         ...original,
-        name: e.currentTarget.value,
+        name: newName,
       })
+      const updateNameMessage: Message = {
+        type: "updateName",
+        id,
+        name: newName,
+      }
+      await chrome.runtime.sendMessage(updateNameMessage)
 
       setTimeout(() => {
         setLoading(false)

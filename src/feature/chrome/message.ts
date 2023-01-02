@@ -4,5 +4,7 @@ export type Message =
       format: string
     }
   | {
-      type: "hello"
+      type: "updateName"
+      id: string
+      name: string
     }
