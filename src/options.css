@@ -165,7 +165,7 @@ body {
 
 .button.withIcon {
   display: flex;
-  padding: var(--space-y-md) var(--space-x-md) var(--space-y-md) 0.5rem;
+  padding: 0.6rem 1.2rem 0.6rem 1rem;
   flex-direction: row;
   gap: var(--space-x-sm);
 }
