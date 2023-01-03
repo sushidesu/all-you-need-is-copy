@@ -10,7 +10,7 @@ import type { Message } from "./feature/chrome/message"
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
 
-  const { data } = useSWRImmutable(
+  const { data, mutate: mutateCopyFormats } = useSWRImmutable(
     { key: "copyFormats" },
     () => {
       console.log("fetch")
@@ -101,6 +101,22 @@ const Options = () => {
     [copyFormats, copyFormatRepository]
   )
 
+  const handleClickAdd = useCallback<
+    React.MouseEventHandler<HTMLButtonElement>
+  >(async () => {
+    setLoading(true)
+
+    await copyFormatRepository.push({
+      name: "no title",
+      format: "",
+    })
+    await mutateCopyFormats()
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [copyFormatRepository])
+
   return (
     <div className={"sections container"}>
       <h1>Copy Format List</h1>
@@ -111,6 +127,7 @@ const Options = () => {
           onBlurName={handleBlurName}
           onChangeFormat={handleUpdateFormat}
           onBlurFormat={handleBlurFormat}
+          onClickAdd={handleClickAdd}
         />
       </div>
       {loading && <div className={"alert"}>saving...</div>}

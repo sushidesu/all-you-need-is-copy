@@ -1,5 +1,6 @@
 import type { CopyFormat } from "../../feature/copy/copy-format"
 import type { CopyFormatRepositoryInterface } from "../../feature/copy/copy-format-repository-interface"
+import { ulid } from "ulid"
 
 type ChromeSyncStorage = {
   version: 1
@@ -73,6 +74,10 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
     return bucket["copyFormats"]
   }
 
+  private getNextOrder(bucket: ChromeSyncStorage["copyFormats"]): number {
+    return Object.keys(bucket).length
+  }
+
   async get(id: string): Promise<CopyFormat | undefined> {
     const copyFormats = await this.getCopyFormatsBucket()
     return copyFormats[id]
@@ -83,9 +88,23 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
     return Object.values(copyFormats).sort((a, b) => a.order - b.order)
   }
 
-  push(_copyFormatValue: Omit<CopyFormat, "id">): Promise<void> {
-    // TODO:
-    return Promise.resolve()
+  async push(copyFormatValue: Omit<CopyFormat, "id">): Promise<void> {
+    const bucket = await this.getCopyFormatsBucket()
+
+    const id = ulid()
+    const fmt: CopyFormatInStorage = {
+      id,
+      name: copyFormatValue.name,
+      format: copyFormatValue.format,
+      type: "normal",
+      order: this.getNextOrder(bucket),
+    }
+    await chrome.storage.sync.set({
+      [chromeStorageKeys.copyFormats]: {
+        ...bucket,
+        [id]: fmt,
+      },
+    })
   }
 
   async update(id: string, copyFormat: CopyFormat): Promise<void> {
