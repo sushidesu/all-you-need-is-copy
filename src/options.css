@@ -80,6 +80,8 @@ body {
   font-weight: bold;
 }
 
+/* UI */
+
 .input {
   border: 1px solid var(--color-border);
   padding: var(--space-x-sm) var(--space-y-sm);
@@ -89,6 +91,19 @@ body {
 }
 
 .input:focus-within {
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 0 1px 2.6px var(--color-primary-shadow);
+}
+
+.textarea {
+  border: 1px solid var(--color-border);
+  padding: var(--space-x-sm) var(--space-y-sm);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  outline: 0;
+}
+
+.textarea:focus-within {
   border: 1px solid var(--color-primary);
   box-shadow: 0 0 1px 2.6px var(--color-primary-shadow);
 }

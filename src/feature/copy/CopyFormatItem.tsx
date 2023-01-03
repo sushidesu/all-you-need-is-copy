@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { Input } from "../../ui/Input"
 
 import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
 
@@ -25,7 +26,7 @@ export const CopyFormatItem = ({
   return (
     <div className={"copy-format-item-inner"}>
       <div className={"copy-format-item-cell"}>
-        <input defaultValue={name} onBlur={onBlurName} />
+        <Input defaultValue={name} onBlur={onBlurName} />
       </div>
       <div className={"copy-format-item-cell"}>
         <MiniEditor
