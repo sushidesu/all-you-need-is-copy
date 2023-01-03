@@ -13,3 +13,7 @@ export type Message =
       id: string
       name: string
     }
+  | {
+      type: "removeFormat"
+      id: string
+    }

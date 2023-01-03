@@ -139,11 +139,11 @@ const Options = () => {
 
       await copyFormatRepository.delete(id)
       await mutateCopyFormats()
-      //    const addFormatMessage: Message = {
-      //      id,
-      //      type: "addFormat",
-      //    }
-      // await chrome.runtime.sendMessage(addFormatMessage)
+      const removeFormatMessage: Message = {
+        id,
+        type: "removeFormat",
+      }
+      await chrome.runtime.sendMessage(removeFormatMessage)
 
       setTimeout(() => {
         setLoading(false)

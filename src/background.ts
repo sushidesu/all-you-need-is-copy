@@ -47,6 +47,12 @@ chrome.runtime.onMessage.addListener(async (request, _, response) => {
       )
       break
     }
+    case "removeFormat": {
+      chrome.contextMenus.remove(message.id, () => {
+        response("ok")
+      })
+      break
+    }
     default:
       message satisfies never
   }
