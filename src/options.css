@@ -6,6 +6,21 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-border: rgb(199, 202, 212);
+  --color-primary: rgb(7, 86, 222);
+  --color-primary-shadow: rgba(46, 146, 245, 0.4);
+
+  --space-x-sm: 0.3rem;
+  --space-y-sm: 0.4rem;
+
+  --radius-md: 4px;
+}
+
+body {
+  font-size: 16px;
+}
+
 .block.highlight {
   background-color: rgba(0, 0, 0, 0.04);
   padding: 0.2rem;
@@ -61,4 +76,17 @@
 .copy-format-item-cell.head {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.input {
+  border: 1px solid var(--color-border);
+  padding: var(--space-x-sm) var(--space-y-sm);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  outline: 0;
+}
+
+.input:focus-within {
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 0 1px 2.6px var(--color-primary-shadow);
 }

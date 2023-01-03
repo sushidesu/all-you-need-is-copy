@@ -1,3 +1,5 @@
+import "../src/options.css"
+
 export const parameters = {
   controls: {
     matchers: {
