@@ -10,7 +10,8 @@
   --color-border: rgb(199, 202, 212);
   --color-border: #c1d8e9;
 
-  --color-base: #dbe0ea;
+  --color-base: #e4e9f3;
+  --color-bg-white: #eef2fb;
 
   --color-primary: #41b4cf;
   --color-primary-shadow: #2da5de9e;
@@ -132,6 +133,7 @@ body {
 .textarea {
   border: 1px solid var(--color-border);
   padding: var(--space-x-sm) var(--space-y-sm);
+  background-color: var(--color-bg-white);
   border-radius: var(--radius-md);
   font-size: 1rem;
   outline: 0;
