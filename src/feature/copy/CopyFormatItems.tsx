@@ -3,6 +3,7 @@ import { Button } from "../../ui/Button"
 
 import type { CopyFormat } from "./copy-format"
 import { CopyFormatItem, CopyFormatItemProps } from "./CopyFormatItem"
+import { GoPlus } from "react-icons/go"
 
 type CopyFormatItemsProps = {
   copyFormatItems: CopyFormat[]
@@ -44,7 +45,9 @@ export const CopyFormatItems = ({
           </li>
         ))}
       </ul>
-      <Button onClick={onClickAdd}>＋</Button>
+      <Button onClick={onClickAdd} aria-label={"Add new format"}>
+        <GoPlus />
+      </Button>
     </div>
   )
 }

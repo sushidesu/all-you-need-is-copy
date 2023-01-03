@@ -5,6 +5,7 @@ import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
 import { CpyEditor } from "./CpyEditor"
 import type { Range } from "../../utils/range"
 import { Button } from "../../ui/Button"
+import { GoX } from "react-icons/go"
 
 export type CopyFormatItemProps = {
   name: string
@@ -40,7 +41,9 @@ export const CopyFormatItem = ({
         />
       </div>
       <div className={"copy-format-item-cell"}>
-        <Button onClick={onClickRemove}>remove</Button>{" "}
+        <Button onClick={onClickRemove} aria-label={`Remove ${name}`}>
+          <GoX />
+        </Button>
       </div>
     </div>
   )
