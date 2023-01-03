@@ -34,6 +34,19 @@ chrome.runtime.onMessage.addListener(async (request, _, response) => {
       )
       break
     }
+    case "addFormat": {
+      chrome.contextMenus.create(
+        {
+          id: message.id,
+          title: message.name,
+          contexts: ["all"],
+        },
+        () => {
+          response("ok")
+        }
+      )
+      break
+    }
     default:
       message satisfies never
   }

@@ -8,3 +8,8 @@ export type Message =
       id: string
       name: string
     }
+  | {
+      type: "addFormat"
+      id: string
+      name: string
+    }

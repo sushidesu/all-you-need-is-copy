@@ -14,6 +14,10 @@ chrome.runtime.onMessage.addListener(async (request, _, sendResponse) => {
       // do nothing
       break
     }
+    case "addFormat": {
+      // do nothing
+      break
+    }
     default: {
       message satisfies never
     }

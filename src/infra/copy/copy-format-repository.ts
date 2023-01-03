@@ -88,7 +88,7 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
     return Object.values(copyFormats).sort((a, b) => a.order - b.order)
   }
 
-  async push(copyFormatValue: Omit<CopyFormat, "id">): Promise<void> {
+  async push(copyFormatValue: Omit<CopyFormat, "id">): Promise<string> {
     const bucket = await this.getCopyFormatsBucket()
 
     const id = ulid()
@@ -99,12 +99,15 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
       type: "normal",
       order: this.getNextOrder(bucket),
     }
+
     await chrome.storage.sync.set({
       [chromeStorageKeys.copyFormats]: {
         ...bucket,
         [id]: fmt,
       },
     })
+
+    return id
   }
 
   async update(id: string, copyFormat: CopyFormat): Promise<void> {

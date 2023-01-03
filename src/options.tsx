@@ -106,11 +106,19 @@ const Options = () => {
   >(async () => {
     setLoading(true)
 
-    await copyFormatRepository.push({
-      name: "no title",
-      format: "",
+    const name = "no title"
+    const format = ""
+    const id = await copyFormatRepository.push({
+      name,
+      format,
     })
     await mutateCopyFormats()
+    const addFormatMessage: Message = {
+      id,
+      name,
+      type: "addFormat",
+    }
+    await chrome.runtime.sendMessage(addFormatMessage)
 
     setTimeout(() => {
       setLoading(false)
