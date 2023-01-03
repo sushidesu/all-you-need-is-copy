@@ -19,9 +19,14 @@ export const Default: Story = {
   args: {
     copyFormatItems: [
       {
-        id: "hello",
+        id: "md",
         name: "markdown",
         format: "[<title>](<url>)",
+      },
+      {
+        id: "plain",
+        name: "plain",
+        format: "<title>: <url>",
       },
     ],
     onChangeName: () => action("onChangeName"),
