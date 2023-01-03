@@ -41,7 +41,7 @@ export const CopyFormatItem = ({
         />
       </div>
       <div className={"copy-format-item-cell"}>
-        <Button onClick={onClickRemove} aria-label={`Remove ${name}`}>
+        <Button onClick={onClickRemove} icon aria-label={`Remove ${name}`}>
           <GoX />
         </Button>
       </div>
