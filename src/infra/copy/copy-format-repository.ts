@@ -124,8 +124,22 @@ export class CopyFormatRepository implements CopyFormatRepositoryInterface {
     })
   }
 
-  delete(_id: string): Promise<void> {
-    // TODO:
+  async delete(id: string): Promise<void> {
+    const bucket = await this.getCopyFormatsBucket()
+
+    // 除外
+    const { [id]: _, ...next } = { ...bucket }
+    // order振り直し
+    const ordered = Object.fromEntries(
+      Object.entries(next)
+        .sort(([_ak, a], [_bk, b]) => a.order - b.order)
+        .map(([key, value], i) => [key, { ...value, order: i }])
+    )
+
+    await chrome.storage.sync.set({
+      [chromeStorageKeys.copyFormats]: ordered,
+    })
+
     return Promise.resolve()
   }
 }

@@ -9,6 +9,7 @@ type CopyFormatItemsProps = {
   onChangeFormat: (id: string) => CopyFormatItemProps["onChangeFormat"]
   onBlurFormat: (id: string) => CopyFormatItemProps["onBlurFormat"]
   onClickAdd: MouseEventHandler<HTMLButtonElement>
+  onClickRemove: (id: string) => MouseEventHandler<HTMLButtonElement>
 }
 
 export const CopyFormatItems = ({
@@ -18,6 +19,7 @@ export const CopyFormatItems = ({
   onChangeFormat,
   onBlurFormat,
   onClickAdd,
+  onClickRemove,
 }: CopyFormatItemsProps) => {
   return (
     <div>
@@ -35,6 +37,7 @@ export const CopyFormatItems = ({
               onBlurName={onBlurName(fmt.id)}
               onChangeFormat={onChangeFormat(fmt.id)}
               onBlurFormat={onBlurFormat(fmt.id)}
+              onClickRemove={onClickRemove(fmt.id)}
             />
           </li>
         ))}

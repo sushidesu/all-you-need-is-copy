@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, Suspense, useState } from "react"
+import React, {
+  useCallback,
+  useMemo,
+  Suspense,
+  useState,
+  MouseEventHandler,
+} from "react"
 import ReactDOM from "react-dom/client"
 import type { CopyFormat } from "./feature/copy/copy-format"
 import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
@@ -125,6 +131,27 @@ const Options = () => {
     }, 1000)
   }, [copyFormatRepository])
 
+  const handleClickRemove = useCallback<
+    (id: string) => MouseEventHandler<HTMLButtonElement>
+  >(
+    (id) => async () => {
+      setLoading(true)
+
+      await copyFormatRepository.delete(id)
+      await mutateCopyFormats()
+      //    const addFormatMessage: Message = {
+      //      id,
+      //      type: "addFormat",
+      //    }
+      // await chrome.runtime.sendMessage(addFormatMessage)
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+    },
+    [copyFormatRepository]
+  )
+
   return (
     <div className={"sections container"}>
       <h1>Copy Format List</h1>
@@ -136,6 +163,7 @@ const Options = () => {
           onChangeFormat={handleUpdateFormat}
           onBlurFormat={handleBlurFormat}
           onClickAdd={handleClickAdd}
+          onClickRemove={handleClickRemove}
         />
       </div>
       {loading && <div className={"alert"}>saving...</div>}

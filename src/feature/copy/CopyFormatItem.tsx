@@ -8,6 +8,7 @@ export type CopyFormatItemProps = {
   onBlurFormat: React.FocusEventHandler<HTMLTextAreaElement>
   onChangeName: React.ChangeEventHandler<HTMLInputElement>
   onBlurName: React.FocusEventHandler<HTMLInputElement>
+  onClickRemove: React.MouseEventHandler<HTMLButtonElement>
 }
 
 export const CopyFormatItem = ({
@@ -16,6 +17,7 @@ export const CopyFormatItem = ({
   onBlurName,
   onChangeFormat,
   onBlurFormat,
+  onClickRemove,
 }: CopyFormatItemProps) => {
   const selection = useMemo(() => genSelection(parser(format)), [format])
 
@@ -31,6 +33,9 @@ export const CopyFormatItem = ({
           onChange={onChangeFormat}
           onBlur={onBlurFormat}
         />
+      </div>
+      <div className={"copy-format-item-cell"}>
+        <button onClick={onClickRemove}>remove</button>
       </div>
     </div>
   )
