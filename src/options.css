@@ -24,14 +24,14 @@
   --color-block-highlight: #bae9f3a3;
   --color-block-highlight-text: #0aad97;
 
-  --space-x-sm: 0.3rem;
-  --space-y-sm: 0.4rem;
+  --space-x-sm: 0.4rem;
+  --space-y-sm: 0.3rem;
 
-  --space-x-md: 0.4rem;
-  --space-y-md: 0.8rem;
+  --space-x-md: 0.8rem;
+  --space-y-md: 0.4rem;
 
-  --space-x-lg: 0.8rem;
-  --space-y-lg: 1.2rem;
+  --space-x-lg: 1.2rem;
+  --space-y-lg: 0.8rem;
 
   --radius-md: 4px;
 }
@@ -113,7 +113,7 @@ body {
 }
 
 .cpy-editor-preview {
-  padding: var(--space-x-sm) var(--space-y-sm);
+  padding: var(--space-y-sm) var(--space-x-sm);
 }
 
 .cpy-editor-block {
@@ -132,7 +132,7 @@ body {
 .input,
 .textarea {
   border: 1px solid var(--color-border);
-  padding: var(--space-x-sm) var(--space-y-sm);
+  padding: var(--space-y-sm) var(--space-x-sm);
   background-color: var(--color-bg-white);
   border-radius: var(--radius-md);
   font-size: 1rem;
@@ -150,7 +150,7 @@ body {
 .button {
   font-size: 1rem;
   font-weight: bold;
-  padding: var(--space-x-md) var(--space-y-md);
+  padding: var(--space-y-md) var(--space-x-md);
   background-color: var(--color-primary);
   color: var(--color-primary-text);
   border-radius: var(--radius-md);
@@ -161,4 +161,11 @@ body {
 .button.icon {
   line-height: 0;
   padding: 0.5rem;
+}
+
+.button.withIcon {
+  display: flex;
+  padding: var(--space-y-md) var(--space-x-md) var(--space-y-md) 0.5rem;
+  flex-direction: row;
+  gap: var(--space-x-sm);
 }
