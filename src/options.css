@@ -29,6 +29,9 @@
   --space-x-md: 0.4rem;
   --space-y-md: 0.8rem;
 
+  --space-x-lg: 0.8rem;
+  --space-y-lg: 1.2rem;
+
   --radius-md: 4px;
 }
 
@@ -42,6 +45,13 @@ body {
 
 .layout {
   padding: 2rem 0;
+}
+
+.add-format-button-wrapper {
+  margin-top: var(--space-y-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sections {

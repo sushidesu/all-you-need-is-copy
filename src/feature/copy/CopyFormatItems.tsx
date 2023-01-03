@@ -45,9 +45,11 @@ export const CopyFormatItems = ({
           </li>
         ))}
       </ul>
-      <Button onClick={onClickAdd} icon aria-label={"Add new format"}>
-        <GoPlus />
-      </Button>
+      <div className={"add-format-button-wrapper"}>
+        <Button onClick={onClickAdd} icon aria-label={"Add new format"}>
+          <GoPlus />
+        </Button>
+      </div>
     </div>
   )
 }
