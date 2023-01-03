@@ -23,14 +23,6 @@ body {
     "Hiragino Sans", Meiryo, sans-serif;
 }
 
-.block.highlight {
-  background-color: rgba(0, 0, 0, 0.04);
-  padding: 0.2rem;
-  font-size: 0.7rem;
-  color: #268bd2;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
 .layout {
   padding: 2rem 0;
 }
@@ -78,6 +70,29 @@ body {
 .copy-format-item-cell.head {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+/* CpyEditor */
+
+.cpy-editor-outer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-y-sm);
+}
+
+.cpy-editor-preview {
+  padding: var(--space-x-sm) var(--space-y-sm);
+}
+
+.cpy-editor-block {
+  font-size: 1rem;
+}
+
+.cpy-editor-block.highlight {
+  background-color: rgba(0, 0, 0, 0.04);
+  padding: 0.1rem 0.2rem;
+  color: #268bd2;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* UI */

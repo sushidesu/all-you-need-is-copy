@@ -1,4 +1,5 @@
 import React from "react"
+import { Textarea } from "../../ui/Textarea"
 import { range, Range } from "../../utils/range"
 
 type CpyEditorProps = {
@@ -48,17 +49,17 @@ export const CpyEditor = ({
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <p>
+    <div className={"cpy-editor-outer"}>
+      <p className={"cpy-editor-preview"}>
         {blocks.map((block, i) =>
           block.type === "highlight" ? (
-            <code className={`block ${block.type}`} key={i}>
+            <code className={`cpy-editor-block ${block.type}`} key={i}>
               {[...range(block.range)].map((index) => (
                 <span key={index}>{text[index]}</span>
               ))}
             </code>
           ) : (
-            <span className={`block ${block.type}`} key={i}>
+            <span className={`cpy-editor-block ${block.type}`} key={i}>
               {[...range(block.range)].map((index) => (
                 <span key={index}>{text[index]}</span>
               ))}
@@ -66,7 +67,7 @@ export const CpyEditor = ({
           )
         )}
       </p>
-      <textarea value={text} onChange={onChange} onBlur={onBlur} />
+      <Textarea value={text} onChange={onChange} onBlur={onBlur} rows={1} />
     </div>
   )
 }
