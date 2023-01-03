@@ -8,17 +8,23 @@
 
 :root {
   --color-border: rgb(199, 202, 212);
-  --color-primary: rgb(7, 86, 222);
+  --color-primary: #5cbcff;
   --color-primary-shadow: rgba(46, 146, 245, 0.4);
+
+  --color-text-primary: #333;
 
   --space-x-sm: 0.3rem;
   --space-y-sm: 0.4rem;
+
+  --space-x-md: 0.4rem;
+  --space-y-md: 0.8rem;
 
   --radius-md: 4px;
 }
 
 body {
   font-size: 16px;
+  color: var(--color-text-primary);
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
 }
@@ -121,4 +127,15 @@ body {
 .textarea:focus-within {
   border: 1px solid var(--color-primary);
   box-shadow: 0 0 1px 2.6px var(--color-primary-shadow);
+}
+
+.button {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: var(--space-x-md) var(--space-y-md);
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
 }

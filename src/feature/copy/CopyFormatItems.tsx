@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react"
+import { Button } from "../../ui/Button"
 
 import type { CopyFormat } from "./copy-format"
 import { CopyFormatItem, CopyFormatItemProps } from "./CopyFormatItem"
@@ -43,7 +44,7 @@ export const CopyFormatItems = ({
           </li>
         ))}
       </ul>
-      <button onClick={onClickAdd}>＋</button>
+      <Button onClick={onClickAdd}>＋</Button>
     </div>
   )
 }

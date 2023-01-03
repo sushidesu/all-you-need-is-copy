@@ -4,6 +4,7 @@ import { Input } from "../../ui/Input"
 import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
 import { CpyEditor } from "./CpyEditor"
 import type { Range } from "../../utils/range"
+import { Button } from "../../ui/Button"
 
 export type CopyFormatItemProps = {
   name: string
@@ -39,7 +40,7 @@ export const CopyFormatItem = ({
         />
       </div>
       <div className={"copy-format-item-cell"}>
-        <button onClick={onClickRemove}>remove</button>
+        <Button onClick={onClickRemove}>remove</Button>{" "}
       </div>
     </div>
   )
