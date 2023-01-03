@@ -1,5 +1,6 @@
 import React, { useMemo } from "react"
-import { parser, CpyFormateRoot, CopyFormatNode } from "./parser"
+
+import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
 
 export type CopyFormatItemProps = {
   name: string

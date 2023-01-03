@@ -70,7 +70,7 @@ const URL = "url"
 
 const lex = (text: string): string[] => {
   const tokens: string[] = []
-  let token: string = ""
+  let token = ""
 
   for (const char of Array.from(text)) {
     if (char === LEFT_ANGLE) {

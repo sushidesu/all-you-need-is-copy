@@ -1,6 +1,7 @@
+import { ulid } from "ulid"
+
 import type { CopyFormat } from "../../feature/copy/copy-format"
 import type { CopyFormatRepositoryInterface } from "../../feature/copy/copy-format-repository-interface"
-import { ulid } from "ulid"
 
 type ChromeSyncStorage = {
   version: 1

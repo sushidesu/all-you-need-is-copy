@@ -1,17 +1,18 @@
 import React, {
+  MouseEventHandler,
+  Suspense,
   useCallback,
   useMemo,
-  Suspense,
   useState,
-  MouseEventHandler,
 } from "react"
 import ReactDOM from "react-dom/client"
-import type { CopyFormat } from "./feature/copy/copy-format"
-import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
-import { CopyFormatItems } from "./feature/copy/CopyFormatItems"
-import { useSyncState } from "./ui/useSyncState"
 import useSWRImmutable from "swr/immutable"
+
 import type { Message } from "./feature/chrome/message"
+import type { CopyFormat } from "./feature/copy/copy-format"
+import { CopyFormatItems } from "./feature/copy/CopyFormatItems"
+import { CopyFormatRepository } from "./infra/copy/copy-format-repository"
+import { useSyncState } from "./ui/useSyncState"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
@@ -104,7 +105,7 @@ const Options = () => {
         setLoading(false)
       }, 1000)
     },
-    [copyFormats, copyFormatRepository]
+    [copyFormats, copyFormatRepository, clone]
   )
 
   const handleClickAdd = useCallback<
@@ -129,7 +130,7 @@ const Options = () => {
     setTimeout(() => {
       setLoading(false)
     }, 1000)
-  }, [copyFormatRepository])
+  }, [copyFormatRepository, mutateCopyFormats])
 
   const handleClickRemove = useCallback<
     (id: string) => MouseEventHandler<HTMLButtonElement>
@@ -149,7 +150,7 @@ const Options = () => {
         setLoading(false)
       }, 1000)
     },
-    [copyFormatRepository]
+    [copyFormatRepository, mutateCopyFormats]
   )
 
   return (

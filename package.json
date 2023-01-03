@@ -17,7 +17,7 @@
     "dev": "concurrently \"yarn build:content --watch\" \"yarn build:background --watch\" \"yarn build:options --watch\" \"yarn watch:build:options:html\"",
     "fmt": "concurrently \"yarn:fmt:*\"",
     "fmt:format": "prettier --loglevel error --write src",
-    "fmt:lint": "eslint --fix --max-warnings=0 src/**.ts",
+    "fmt:lint": "eslint --fix --max-warnings=0 src/**/*.{ts,tsx}",
     "test": "vitest"
   },
   "devDependencies": {
@@ -33,6 +33,8 @@
     "esbuild": "^0.16.12",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.8.1",

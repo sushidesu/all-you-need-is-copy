@@ -5,9 +5,16 @@ const config = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
   ],
   plugins: ["unused-imports", "simple-import-sort"],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
@@ -22,6 +29,7 @@ const config = {
         argsIgnorePattern: "^_",
       },
     ],
+    "react-hooks/exhaustive-deps": "error",
   },
 }
 

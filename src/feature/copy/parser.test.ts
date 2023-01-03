@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest"
-import { parser, CpyFormateRoot } from "./parser"
+import { describe, expect, it } from "vitest"
+
+import { CpyFormateRoot, parser } from "./parser"
 
 describe(`parser`, () => {
   it(`empty string`, () => {
