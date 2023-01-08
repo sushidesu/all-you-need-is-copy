@@ -14,6 +14,7 @@ import type { CopyFormat } from "../feature/copy/copy-format"
 import { CopyFormatItems } from "../feature/copy/CopyFormatItems"
 import { CopyFormatRepository } from "../infra/copy/copy-format-repository"
 import { useSyncState } from "../ui/useSyncState"
+import Logo from "../svg/logo.svg"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])
@@ -191,7 +192,10 @@ export const OptionsTemplate = ({
 }: OptionsProps) => {
   return (
     <div className={"sections container"}>
-      <h1>Copy Format List</h1>
+      <div className={"title-with-logo"}>
+        <Logo width={"64px"} />
+        <h1>Copy Format List</h1>
+      </div>
       <div className={"section"}>
         <CopyFormatItems
           copyFormatItems={copyFormatItems}

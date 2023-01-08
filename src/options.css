@@ -67,6 +67,13 @@ body {
   padding: 0 2rem;
 }
 
+.title-with-logo {
+  margin-left: var(--space-x-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-x-sm);
+}
+
 .copy-format-items {
   display: grid;
   grid-template-columns: max-content 1fr max-content;
