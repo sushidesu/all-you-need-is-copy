@@ -14,7 +14,7 @@
     "build:options:css": "cp src/options.css build/options.css",
     "watch:build:options:css": "chokidar \"src/options.css\" -c \"cp src/options.css build/options.css\"",
     "build:manifest": "node src/scripts/build-manifest.js",
-    "build:assets": "cp -r src/assets build/assets",
+    "build:assets": "rm -r build/assets && cp -r src/assets build/assets",
     "dev": "concurrently \"yarn build:apps -w\" \"yarn watch:build:options:html\" \"yarn watch:build:options:css\" \"yarn build:assets\"",
     "fmt": "concurrently \"yarn:fmt:*\"",
     "fmt:format": "prettier --loglevel error --write src",
