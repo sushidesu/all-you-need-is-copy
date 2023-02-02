@@ -18,7 +18,7 @@
     "dev": "concurrently \"yarn build:apps -w\" \"yarn watch:build:options:html\" \"yarn watch:build:options:css\" \"yarn build:assets\"",
     "fmt": "concurrently \"yarn:fmt:*\"",
     "fmt:format": "prettier --loglevel error --write src",
-    "fmt:lint": "eslint --fix --max-warnings=0 src/**/*.{ts,tsx}",
+    "fmt:lint": "eslint --fix --max-warnings=0 'src/**/*.{ts,tsx}'",
     "test": "vitest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
