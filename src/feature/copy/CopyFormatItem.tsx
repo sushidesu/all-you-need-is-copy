@@ -61,8 +61,17 @@ const genSelection = (root: CpyFormateRoot): Range[] => {
   for (const node of paragraph) {
     switch (node.type) {
       case "cpyAngleBracket": {
+        const firstChild = node.children[0]
+        if (1 < node.children.length || firstChild === undefined) {
+          continue
+        }
         const length = getLength(node)
-        result.push([j, j + length + 2])
+        if (
+          firstChild.type === "cpySymbolTitle" ||
+          firstChild.type === "cpySymbolUrl"
+        ) {
+          result.push([j, j + length + 2])
+        }
         j += length + 2
         continue
       }
