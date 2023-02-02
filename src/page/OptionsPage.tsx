@@ -13,8 +13,8 @@ import type { Message } from "../feature/chrome/message"
 import type { CopyFormat } from "../feature/copy/copy-format"
 import { CopyFormatItems } from "../feature/copy/CopyFormatItems"
 import { CopyFormatRepository } from "../infra/copy/copy-format-repository"
-import { useSyncState } from "../ui/useSyncState"
 import Logo from "../svg/logo.svg"
+import { useSyncState } from "../ui/useSyncState"
 
 const Options = () => {
   const copyFormatRepository = useMemo(() => new CopyFormatRepository(), [])

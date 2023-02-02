@@ -1,11 +1,11 @@
 import React, { useMemo } from "react"
-import { Input } from "../../ui/Input"
-
-import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
-import { CpyEditor } from "./CpyEditor"
-import type { Range } from "../../utils/range"
-import { Button } from "../../ui/Button"
 import { GoX } from "react-icons/go"
+
+import { Button } from "../../ui/Button"
+import { Input } from "../../ui/Input"
+import type { Range } from "../../utils/range"
+import { CpyEditor } from "./CpyEditor"
+import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
 
 export type CopyFormatItemProps = {
   name: string

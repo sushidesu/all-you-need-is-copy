@@ -1,9 +1,9 @@
 import React, { MouseEventHandler } from "react"
-import { Button } from "../../ui/Button"
+import { GoPlus } from "react-icons/go"
 
+import { Button } from "../../ui/Button"
 import type { CopyFormat } from "./copy-format"
 import { CopyFormatItem, CopyFormatItemProps } from "./CopyFormatItem"
-import { GoPlus } from "react-icons/go"
 
 type CopyFormatItemsProps = {
   copyFormatItems: CopyFormat[]
