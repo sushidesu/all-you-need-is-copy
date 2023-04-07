@@ -1,6 +1,7 @@
 import React from "react"
+
 import { Textarea } from "../../ui/Textarea"
-import { range, Range } from "../../utils/range"
+import { Range, range } from "../../utils/range"
 
 type CpyEditorProps = {
   text: string

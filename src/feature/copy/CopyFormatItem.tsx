@@ -1,11 +1,11 @@
 import React, { useMemo } from "react"
-import { Input } from "../../ui/Input"
-
-import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
-import { CpyEditor } from "./CpyEditor"
-import type { Range } from "../../utils/range"
-import { Button } from "../../ui/Button"
 import { GoX } from "react-icons/go"
+
+import { Button } from "../../ui/Button"
+import { Input } from "../../ui/Input"
+import type { Range } from "../../utils/range"
+import { CpyEditor } from "./CpyEditor"
+import { CopyFormatNode, CpyFormateRoot, parser } from "./parser"
 
 export type CopyFormatItemProps = {
   name: string
@@ -61,8 +61,17 @@ const genSelection = (root: CpyFormateRoot): Range[] => {
   for (const node of paragraph) {
     switch (node.type) {
       case "cpyAngleBracket": {
+        const firstChild = node.children[0]
+        if (1 < node.children.length || firstChild === undefined) {
+          continue
+        }
         const length = getLength(node)
-        result.push([j, j + length + 2])
+        if (
+          firstChild.type === "cpySymbolTitle" ||
+          firstChild.type === "cpySymbolUrl"
+        ) {
+          result.push([j, j + length + 2])
+        }
         j += length + 2
         continue
       }
